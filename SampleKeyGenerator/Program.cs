@@ -8,6 +8,9 @@ namespace SampleKeyGenerator
     {
         static void Main(string[] args)
         {
+            int day = 0;
+            int month = 0;
+            int year = 0;
             while (true)
             {
                 // Here in SampleKeyGenerator is the full set of KeyByteSet used to generate the licence key.
@@ -15,7 +18,14 @@ namespace SampleKeyGenerator
                 Console.WriteLine("\nEnter date here, format "+"DD-MM-YYYY");
 
                 Console.WriteLine();
-                
+
+
+            
+            // string authors = "Mahesh Chand, Henry He, Chris Love, Raj Beniwal, Praveen Kumar";
+            // Split authors separated by a comma followed by space
+            
+
+
                 // Console.WriteLine("\nRead data "+ Console.ReadLine());
 
                 // string[] authorsList = Console.ReadLine().Split('/');
@@ -23,6 +33,17 @@ namespace SampleKeyGenerator
                 // Console.WriteLine(author);
 
                 string str = Console.ReadLine();// macAddr;
+
+                string[] authorsList = str.Split('-');
+                //foreach (string author in authorsList)
+                //   {
+                    day = Int32.Parse(authorsList[0]);
+                    month = Int32.Parse(authorsList[1]);
+                    year = Int32.Parse(authorsList[2]);
+                    //   Console.WriteLine(author);
+
+               // }
+
                 KeyByteSet[] keyByteSets1 = new KeyByteSet[str.Length];
                 // Creating byte array of string length 
                 byte[] byt = new byte[str.Length];
@@ -74,14 +95,31 @@ namespace SampleKeyGenerator
                 string licenceKey = pkvLicenceKeyGenerator.MakeKey(seed, keyByteSets);
 
                 Console.WriteLine("Generated licence key is:");
-                Console.WriteLine(licenceKey);
+                Console.WriteLine(licenceKey+"#"+day+"-"+month+"-"+year);
 
                 // The values output can now be copied into the SampleKeyVerification console app to demonstrate
                 // verification.
 
                 Console.WriteLine("\nCopy these values to a running instance of SampleKeyVerification to test key verification.");
 
-                Console.WriteLine("\nPress any key to generate another licence key.");
+                Console.WriteLine("\nPress any key to generate another license key.");
+
+
+                var key = "b14ca5898a4e4133bbce2ea2315a1916";
+
+                //Console.WriteLine("Please enter a secret key for the symmetric algorithm.");
+                //var key = Console.ReadLine();
+
+               // Console.WriteLine("Please enter a string for encryption");
+               // var str1 = Console.ReadLine();
+                var encryptedString = AesOperation.EncryptString(key, licenceKey + "#" + day.ToString("00") + "-" + month.ToString("00") + "-" + year.ToString("0000"));
+                Console.WriteLine($"encrypted string = {encryptedString}");
+
+                var decryptedString = AesOperation.DecryptString(key, encryptedString);
+                Console.WriteLine($"decrypted string = {decryptedString}");
+
+                // EncryptionHelper.Encrypt("ranojan");
+                // EncryptionHelper.Decrypt();
 
                 Console.ReadKey();
             }

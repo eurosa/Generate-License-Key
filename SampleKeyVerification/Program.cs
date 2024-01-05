@@ -10,7 +10,7 @@ namespace SampleKeyVerification
         {
             while (true)
             {
-                // In your application that is to be distributed to the end user (which needs to verify the licence
+                // In your application that is to be distributed to the end user (which needs to verify the license
                 // key), only include a subset of the full keyByteSets array used in SampleKeyGenerator. This is so
                 // the full set of KeyByteSets is not being compiled into your distributable application code and you have the option
                 // of changing the KeyByteSets that are verified.
