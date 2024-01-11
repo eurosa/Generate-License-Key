@@ -15,15 +15,15 @@ namespace SampleKeyGenerator
             {
                 // Here in SampleKeyGenerator is the full set of KeyByteSet used to generate the licence key.
                 // You should change these values in your solution.
-                Console.WriteLine("\nEnter date here, format "+"DD-MM-YYYY");
-
+                Console.WriteLine("\nEnter date here, format "+"MM-DD-YYYY");
+                  
                 Console.WriteLine();
 
 
-            
-            // string authors = "Mahesh Chand, Henry He, Chris Love, Raj Beniwal, Praveen Kumar";
-            // Split authors separated by a comma followed by space
-            
+                
+                // string authors = "Mahesh Chand, Henry He, Chris Love, Raj Beniwal, Praveen Kumar";
+                // Split authors separated by a comma followed by space
+                
 
 
                 // Console.WriteLine("\nRead data "+ Console.ReadLine());
