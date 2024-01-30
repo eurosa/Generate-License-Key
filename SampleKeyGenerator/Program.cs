@@ -85,43 +85,47 @@ namespace SampleKeyGenerator
 
                 int seed = new Random().Next(0, int.MaxValue);
 
-                Console.WriteLine("Seed (for example user ID) is:");
-                Console.WriteLine(seed);
+              //  Console.WriteLine("Seed (for example user ID) is:"+ LicenseVerification.LicenseVerify());
+               // Console.WriteLine(seed);
 
-                // Generate the key ... 
+                if (LicenseVerification.LicenseVerify()[0].Equals("KeyIsValid")) {
+                    // Generate the key ... 
+                    // Console.WriteLine("Key validation and Expiration: " + LicenseVerification.LicenseVerify()[0]+" "+ LicenseVerification.LicenseVerify()[1]);
+                    if (LicenseVerification.LicenseVerify()[1].Equals("0")) { 
+                    var pkvLicenceKeyGenerator = new PkvKeyGenerator();
 
-                var pkvLicenceKeyGenerator = new PkvKeyGenerator();
+                    string licenceKey = pkvLicenceKeyGenerator.MakeKey(seed, keyByteSets);
 
-                string licenceKey = pkvLicenceKeyGenerator.MakeKey(seed, keyByteSets);
+                    // Console.WriteLine("Generated licence key is: ");
+                    // Console.WriteLine(licenceKey + "#" + day + "-" + month + "-" + year);
 
-                Console.WriteLine("Generated licence key is:");
-                Console.WriteLine(licenceKey+"#"+day+"-"+month+"-"+year);
+                    // The values output can now be copied into the SampleKeyVerification console app to demonstrate
+                    // verification.
 
-                // The values output can now be copied into the SampleKeyVerification console app to demonstrate
-                // verification.
+                    //Console.WriteLine("\nCopy these values to a running instance of SampleKeyVerification to test key verification.");
 
-                Console.WriteLine("\nCopy these values to a running instance of SampleKeyVerification to test key verification.");
+                    Console.WriteLine("\nPress any key to generate another license key.");
+                    Console.WriteLine("\n");
 
-                Console.WriteLine("\nPress any key to generate another license key.");
+                    var key = "b14ca5898a4e4133bbce2ea2315a1916";
 
+                    //Console.WriteLine("Please enter a secret key for the symmetric algorithm.");
+                    //var key = Console.ReadLine();
 
-                var key = "b14ca5898a4e4133bbce2ea2315a1916";
+                    // Console.WriteLine("Please enter a string for encryption");
+                    // var str1 = Console.ReadLine();
+                    var encryptedString = AesOperation.EncryptString(key, licenceKey + "#" + day.ToString("00") + "-" + month.ToString("00") + "-" + year.ToString("0000"));
+                    Console.WriteLine($"{encryptedString}");
+                           
+                    var decryptedString = AesOperation.DecryptString(key, encryptedString);
+                    //  Console.WriteLine($"decrypted string = {decryptedString}");
+   
+                    //  EncryptionHelper.Encrypt("ranojan");
+                    //  EncryptionHelper.Decrypt();
+                    }
+                }
 
-                //Console.WriteLine("Please enter a secret key for the symmetric algorithm.");
-                //var key = Console.ReadLine();
-
-               // Console.WriteLine("Please enter a string for encryption");
-               // var str1 = Console.ReadLine();
-                var encryptedString = AesOperation.EncryptString(key, licenceKey + "#" + day.ToString("00") + "-" + month.ToString("00") + "-" + year.ToString("0000"));
-                Console.WriteLine($"encrypted string = {encryptedString}");
-
-                var decryptedString = AesOperation.DecryptString(key, encryptedString);
-                Console.WriteLine($"decrypted string = {decryptedString}");
-
-                // EncryptionHelper.Encrypt("ranojan");
-                // EncryptionHelper.Decrypt();
-
-                Console.ReadKey();
+                    Console.ReadKey();
             }
         }
     }

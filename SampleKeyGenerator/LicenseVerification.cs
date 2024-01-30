@@ -10,10 +10,14 @@ using System.Text;
 
 namespace SampleKeyGenerator
 {
-    public class LicenseVerification
+    public static class LicenseVerification
     {
-        public string LicenseVerify(string productKey1)
+        private static string IsExpired;
+
+        public static string[] LicenseVerify()
         {
+            string[] strArray = new string[2];
+           
             /* int day = 0;
              int month = 0;
              int year = 0;
@@ -28,7 +32,7 @@ namespace SampleKeyGenerator
                  Console.WriteLine(author);
 
              }*/
-            string productKey = "2FZOw+xVbUFsIRwVzJPptKUSXgyqPGDElOeACLyqgd7rGG3YqQ3S+bTuSzlGgzsu";
+            string productKey =  "2FZOw+xVbUFsIRwVzJPptKUSXgyqPGDElOeACLyqgd7rGG3YqQ3S+bTuSzlGgzsu";//"lqtDWuwr1QLPWn1tvMBDO7aYr4rV5tLrl9r0IuUjqO1mXp7GN6ERK4Zgk1gv6PgU";//
 
             var secretKey = "b14ca5898a4e4133bbce2ea2315a1916";
 
@@ -44,7 +48,7 @@ namespace SampleKeyGenerator
 
             string[] authorsList = decryptedString.Split('#');
 
-            Console.WriteLine($"decrypted string = {decryptedString}");
+          //  Console.WriteLine($"decrypted string = {decryptedString}");
 
 
             // KeyByteSet[] keyByteSets = new KeyByteSet[] { };
@@ -163,40 +167,43 @@ namespace SampleKeyGenerator
 
             RegistryKey rootKey = Registry.CurrentUser;
             RegistryKey regKey = rootKey.OpenSubKey(keyName);
-            if (regKey == null) // first time app has been used
-            {
+           // if (regKey == null) // first time app has been used
+           // {
                 regKey = rootKey.CreateSubKey(keyName);
                 long expiry = DateTime.Today.AddDays(period).Ticks;
                 regKey.SetValue("expiry", expiry, RegistryValueKind.QWord);
-                regKey.Close();
-            }
-            else
-            {
-                long expiry = (long)regKey.GetValue("expiry");
+               // regKey.Close();
+            // }
+            //  else
+            //  {
+                expiry = (long)regKey.GetValue("expiry");
+             // long expiry = (long)regKey.GetValue("expiry");
                 regKey.Close();
                 long today = DateTime.Today.Ticks;
 
 
                 if (today > expiry)
                 {
-                    Console.WriteLine("Sorry your Software Expired...!!!");
-                    //Globals.IsExpired = false;
+                  //  Console.WriteLine("Sorry your Software Expired...!!!");
+                    IsExpired = "1";
 
                 }
                 else
                 {
 
-                    Console.WriteLine("Sorry your Software not Expired...!!!" + expiry);
-                    //Globals.IsExpired = true;
+                  //  Console.WriteLine("Sorry your Software not Expired...!!!" + expiry);
+                    IsExpired = "0";
+                    
                 }
 
-            }
+            // }
 
-
+            strArray[0] = pkvKeyVerificationResult.ToString();
+            strArray[1] = IsExpired;
 
 
             pkvKeyVerifier = null;
-            return pkvKeyVerificationResult.ToString();
+            return strArray;
         }
 
         public static string ByteArrayToString(byte[] ba)
