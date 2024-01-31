@@ -171,12 +171,12 @@ namespace SampleKeyGenerator
            // {
                 regKey = rootKey.CreateSubKey(keyName);
                 long expiry = DateTime.Today.AddDays(period).Ticks;
-                regKey.SetValue("expiry", expiry, RegistryValueKind.QWord);
+                regKey.SetValue("expirymine", expiry, RegistryValueKind.QWord);
                // regKey.Close();
             // }
             //  else
             //  {
-                expiry = (long)regKey.GetValue("expiry");
+                expiry = (long)regKey.GetValue("expirymine");
              // long expiry = (long)regKey.GetValue("expiry");
                 regKey.Close();
                 long today = DateTime.Today.Ticks;
