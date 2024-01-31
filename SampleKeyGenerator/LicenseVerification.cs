@@ -17,7 +17,7 @@ namespace SampleKeyGenerator
         public static string[] LicenseVerify()
         {
             string[] strArray = new string[2];
-           
+
             /* int day = 0;
              int month = 0;
              int year = 0;
@@ -32,7 +32,7 @@ namespace SampleKeyGenerator
                  Console.WriteLine(author);
 
              }*/
-            string productKey =  "2FZOw+xVbUFsIRwVzJPptKUSXgyqPGDElOeACLyqgd7rGG3YqQ3S+bTuSzlGgzsu";//"lqtDWuwr1QLPWn1tvMBDO7aYr4rV5tLrl9r0IuUjqO1mXp7GN6ERK4Zgk1gv6PgU";//
+            string productKey = "G7tpNaaTs1We8KpTD/JG+U0iAE2g04c2po6wAJ6TZ38MOy7IUNwMwZn9Kn7O2DIp"; //"a5jSSQB9UpVQqsfugA3i0mqm4SzejtjBVaYcA5v3bFjlKK1AYTeXWRQ2A9Ex6dwu";
 
             var secretKey = "b14ca5898a4e4133bbce2ea2315a1916";
 
